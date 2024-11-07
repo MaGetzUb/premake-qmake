@@ -63,6 +63,7 @@ function m.generate(prj)
 		m.resources(cfg)
 		m.headers(cfg)
 		m.sources(cfg)
+		m.dists(cfg)
 
 		m.includepath(cfg)
 		m.pchheader(cfg)
