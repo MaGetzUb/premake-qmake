@@ -377,6 +377,29 @@ function m.libs(cfg)
 		end
 	end
 
+	 resultlinks = { } 
+	 for _, link in ipairs(links) do 
+	 	local dir, lib, ext = pathComponents(link)
+	 	if dir ~= nil and lib ~= nil and ext ~= nil then  
+	 		if string.sub(lib, 1, 3) == "lib" then 
+	 			lib = "-l" .. string.sub(lib, 4, -1)
+	 		end 
+			local linkable = nil
+			if #dir > 0 then
+				dirp = string.sub(dir, 1, -2)
+				linkable = '-L' .. dirp .. ' ' .. lib
+				print(dirp)
+			else
+				linkable = link
+			end 
+			table.insert(resultlinks, linkable)
+	 	else 
+	 		table.insert(resultlinks, link) 
+	 	end 
+	 end 
+	
+	 links = resultlinks
+
 	if #ldflags > 0 or #libdirs > 0 or #links > 0 then
 		qmake.pushVariable("LIBS")
 		for _, flag in ipairs(ldflags) do
