@@ -124,6 +124,9 @@ function m.configs.cppdialect(cfg)
 		["gnu++11"] = "c++11",
 		["gnu++14"] = "c++14",
 		["gnu++17"] = "c++17",
+		["C++20"] = "c++20",
+		["C++23"] = "c++23",
+		["C++latest"] = "c++2b"
 	}
 	if dialects[cfg.cppdialect] then
 		p.w(dialects[cfg.cppdialect])
