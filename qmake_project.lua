@@ -13,6 +13,27 @@ local function pwdpath(fullpath)
 	return p.quoted(path.join("$$PWD", fullpath))
 end
 
+-- Based on: https://stackoverflow.com/questions/5243179/what-is-the-neatest-way-to-split-out-a-path-name-into-its-components-in-lua
+local function pathComponents(filePath)
+	local path, filename, extension
+	
+	-- Match the full path and filename
+	path, filename = filePath:match("(.-)([^\\/]-%.?([^%.\\/]*))$")
+	
+	-- Separate filename and extension
+	filename, extension = filename:match("(.-)%.([^%.]+)$")
+	
+	-- If there's no extension, set filename and extension appropriately
+	if not extension then
+		filename = path:match("([^\\/]+)$")
+		path = path:match("(.-)[^\\/]+$")
+		extension = ""
+	end
+	
+	return path, filename, extension
+end
+
+
 --
 -- Generate a qmake project
 --
