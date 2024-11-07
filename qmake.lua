@@ -65,7 +65,7 @@ function qmake.fileConfigs(cfg, exts, filter)
 		p.tree.traverse(tr, {
 			onleaf = function(node)
 				local fcfg = p.fileconfig.getconfig(node, cfg)
-				if fcfg and path.hasextension(node.name, exts) and not filter(fcfg) then
+				if (fcfg and path.hasextension(node.name, exts) and not filter(fcfg)) or exts[".*"] ~= nil then
 					table.insert(fconfigs, fcfg)
 				end
 			end
@@ -76,7 +76,7 @@ end
 
 function qmake.configName(cfg)
 	local buildcfg = cfg.buildcfg:lower()
-	if buildcfg == "debug" or buildcfg == "release" then
+	if buildcfg == "debug" or buildcfg == "release" or buildcfg == "profile" then
 		return buildcfg
 	else
 		local debugsymbols = {
