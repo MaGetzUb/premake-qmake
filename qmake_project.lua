@@ -238,7 +238,8 @@ function m.defines(cfg)
 	if #cfg.undefines > 0 then
 		qmake.pushVariable("DEFINES", "-=")
 		for _, undefine in ipairs(cfg.undefines) do
-			p.w(undefine)
+			-- Escape each undefine with quotes, doesn't effect the final macro itself, for consistency's sake.
+			p.w("\""..undefine.."\"")
 		end
 		qmake.popVariable()
 	end
