@@ -295,6 +295,10 @@ function m.sources(cfg)
 	m.files(cfg, "SOURCES", {".c", ".cc", ".cpp", ".cxx"}, function(filecfg) return filecfg.flags.ExcludeFromBuild or filecfg.buildaction == "None" end)
 end
 
+function m.dists(cfg) 
+	m.files(cfg, "DISTFILES", {".*"})
+end 
+
 --
 -- Include path
 --
