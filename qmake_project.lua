@@ -197,6 +197,8 @@ function m.qt(cfg)
 			p.w(qtmodule)
 		end
 		qmake.popVariable()
+	else 
+		p.w("CONFIG -= Qt")	
 	end
 end
 
